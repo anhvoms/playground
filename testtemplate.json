@@ -4,14 +4,14 @@
     "parameters": {
         "startIndex": {
             "type": "int",
-            "defaultValue": 5,
+            "defaultValue": 230,
             "metadata": {
                 "description": "First integer to add"
             }
         },
         "count": {
             "type": "int",
-            "defaultValue": 3,
+            "defaultValue": 20,
             "metadata": {
                 "description": "Second integer to add"
             }
