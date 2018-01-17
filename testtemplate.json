@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "startIndex": {
+            "type": "int",
+            "defaultValue": 5,
+            "metadata": {
+                "description": "First integer to add"
+            }
+        },
+        "count": {
+            "type": "int",
+            "defaultValue": 3,
+            "metadata": {
+                "description": "Second integer to add"
+            }
+        }
+    },
+    "variables": {
+        "networkSettings": {
+            "virtualNetworkName": "virtualnetwork",
+            "addressPrefix": "10.0.0.0/16",
+            "subnet": {
+                "dse": {
+                    "name": "dse",
+                    "prefix": "10.0.0.0/22",
+                    "vnet": "virtualnetwork"
+                }
+            },
+            "statics": {
+                "workerRange": {
+                    "base": "10.0.0.",
+                    "start": 5
+                },
+                "auxRange": {
+                    "base": "10.0.0.",
+                    "start": 250
+                },
+                "infraRange": {
+                    "base": "10.0.0.",
+                    "start": 240
+                },
+                "lbIP": "10.0.0.4"
+            }
+        },
+        "realIndex": "[add(parameters('startIndex'),5]",
+        "thirdOctet": "[div(variables('realIndex'),240)]",
+        "overflow": "[if(greaterOrEquals(add(variables('realIndex'),parameters('count')),240), 1, 0]",
+        "beginIndex1":"[mod(variables('realIndex'),240)]",
+        "firstCount":"[if(equals(variables('overflow'),0),parameters('count'),sub(240,variables('beginIndex1'))]",
+        "secondCount":"[if(equals(variables('overflow'),0),0,sub(parameters('count'),variables('firstCount')))]"
+    },
+    "resources": [],
+    "outputs": {
+        "rI": {
+            "type": "int",
+            "value": "[variables('realIndex')]"
+        },
+        "thirdO": {
+            "type": "int",
+            "value": "[variables('thirdOctet')]"
+        },
+        "of": {
+            "type": "int",
+            "value": "[variables('overflow')]"
+        },
+        "bI": {
+            "type": "int",
+            "value": "[variables('beginIndex1')]"
+        },
+        "fC": {
+            "type": "int",
+            "value": "[variables('firstCount')]"
+        },
+        "sC": {
+            "type": "int",
+            "value": "[variables('secondCount')]"
+        }
+    }
+}
