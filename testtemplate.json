@@ -46,9 +46,9 @@
         },
         "realIndex": "[add(parameters('startIndex'),5]",
         "thirdOctet": "[div(variables('realIndex'),240)]",
-        "overflow": "[if(greaterOrEquals(add(variables('realIndex'),parameters('count')),240), 1, 0]",
+        "overflow": "[if(greaterOrEquals(add(variables('realIndex'),parameters('count')),240), 1, 0)]",
         "beginIndex1":"[mod(variables('realIndex'),240)]",
-        "firstCount":"[if(equals(variables('overflow'),0),parameters('count'),sub(240,variables('beginIndex1'))]",
+        "firstCount":"[if(equals(variables('overflow'),0),parameters('count'),sub(240,variables('beginIndex1')))]",
         "secondCount":"[if(equals(variables('overflow'),0),0,sub(parameters('count'),variables('firstCount')))]"
     },
     "resources": [],
