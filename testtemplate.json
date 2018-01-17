@@ -44,7 +44,7 @@
                 "lbIP": "10.0.0.4"
             }
         },
-        "realIndex": "[add(parameters('startIndex'),5]",
+        "realIndex": "[add(parameters('startIndex'),5)]",
         "thirdOctet": "[div(variables('realIndex'),240)]",
         "overflow": "[if(greaterOrEquals(add(variables('realIndex'),parameters('count')),240), 1, 0)]",
         "beginIndex1":"[mod(variables('realIndex'),240)]",
